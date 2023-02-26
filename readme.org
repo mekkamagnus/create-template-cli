@@ -1,0 +1,11 @@
+* create-template-cli
+A project to:
+- Setup projects quickly
+- Develop my JavaScript and Node.js skills
+- Rapid prototyping through code generation
+
+Template:
+- Template generation
+- Scaffolding template
+- Custom Code Generation
+

@@ -1,0 +1,13 @@
+{
+  "name": "create-template-cli",
+  "version": "0.0.1",
+  "description": "A project template generation CLI",
+  "bin": {
+    "create-template-cli": "index.js",
+    "tcli": "index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "copy-template-dir": "^1.4.0"
+  }
+}
