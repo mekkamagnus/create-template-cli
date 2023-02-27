@@ -1,5 +1,5 @@
-#!/usr/bin/env node --no-warnings --inspect
-// --inspect
+#!/usr/bin/env node --no-warnings
+// --inspect-brk or --inspect
 import copy from 'copy-template-dir';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -10,7 +10,6 @@ import handleError from 'cli-handle-error';
 
 (async () => {
   init();
-
   const name = await ask({
     message: 'CLI name?',
     hint: '(use kebab-case only)',
@@ -23,6 +22,19 @@ import handleError from 'cli-handle-error';
     initial: '0.0.1',
   });
 
+  const authorName = await ask({
+    message: 'CLI authorName?',
+  });
+  const authorEmail = await ask({
+    message: 'CLI authorEmail?',
+  });
+  const authorUrl = await ask({
+    message: 'CLI authorUrl?',
+  });
+  const license = await ask({
+    message: 'CLI license?',
+    initial: 'UNLICENSED',
+  });
   // handleError(`INPUT`, error);
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
@@ -30,6 +42,10 @@ import handleError from 'cli-handle-error';
     name,
     description,
     version,
+    authorName,
+    authorEmail,
+    authorUrl,
+    license,
   };
 
   const inDir = path.join(__dirname, `template`);
