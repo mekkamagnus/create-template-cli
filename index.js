@@ -4,6 +4,8 @@ import copy from 'copy-template-dir';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import chalk from 'chalk';
+import alert from 'cli-alerts';
 import init from './utils/init.js';
 import ask from './utils/ask.js';
 import handleError from 'cli-handle-error';
@@ -48,18 +50,28 @@ import handleError from 'cli-handle-error';
     license,
   };
 
-  const inDir = path.join(__dirname, `template`);
-  const outDir = path.join(process.cwd(), vars.name);
+  const outDir = vars.name;
+  const inDirPath = path.join(__dirname, `template`);
+  const outDirPath = path.join(process.cwd(), outDir);
 
-  copy(inDir, outDir, vars, (err, createdFiles) => {
+  copy(inDirPath, outDirPath, vars, (err, createdFiles) => {
     if (err) throw err;
     console.log();
-    console.log(`Creating files in ./${vars.name}`);
+    console.log(
+      chalk.dim(
+        `Creating files in ${chalk.green(`./${outDir}`)} directory: \n`,
+      ),
+    );
     createdFiles.forEach(filePath => {
       const fileName = path.basename(filePath);
-      console.log(`Created ${fileName}`);
+      console.log(`${chalk.green(`CREATED`)} ${fileName}`);
     });
-    console.log('done!');
-    console.log();
+    alert({
+      type: `success`,
+      name: `ALL DONE`,
+      msg: `\n\n${createdFiles.length} files created in ${chalk.green(
+        `./${outDir}`,
+      )}`,
+    });
   });
 })();
